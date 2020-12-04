@@ -17,16 +17,29 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var twentyPctButton: UIButton!
     @IBOutlet weak var splitNumberLabel: UILabel!
     
-    
+    //MARK:- Variables
+    var tip: Float?
 
     //MARK:- IBActions
     @IBAction func tipChanged(_ sender: UIButton) {
+        
+        //to select and deselect the buttons
+        zeroPctButton.isSelected = false
+        tenPctButton.isSelected = false
+        twentyPctButton.isSelected = false
+        sender.isSelected = true
+        
+        let buttonTitle = sender.currentTitle!
+        let buttonTitleMinuePercentSign = String(buttonTitle.dropLast())
+        
+        tip = Float(buttonTitleMinuePercentSign)
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
     }
     
     @IBAction func calculatePressed(_ sender: Any) {
+        print(tip)
     }
     
 }
