@@ -18,10 +18,15 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var splitNumberLabel: UILabel!
     
     //MARK:- Variables
-    var tip: Float?
+    var tip = 0.10
+    var numberOfPeople = 2
+    var billTotal = 0.0
+    var finalResult = "0.0"
 
     //MARK:- IBActions
     @IBAction func tipChanged(_ sender: UIButton) {
+        //to end keyboard editing for bill section
+        billTextField.endEditing(true)
         
         //to select and deselect the buttons
         zeroPctButton.isSelected = false
@@ -29,17 +34,21 @@ class CalculatorViewController: UIViewController {
         twentyPctButton.isSelected = false
         sender.isSelected = true
         
+        //for dropping % sign from button title
         let buttonTitle = sender.currentTitle!
         let buttonTitleMinuePercentSign = String(buttonTitle.dropLast())
         
-        tip = Float(buttonTitleMinuePercentSign)
+        let buttonTitleAsANumber = Double(buttonTitleMinuePercentSign)!
+        tip = buttonTitleAsANumber / 100
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        splitNumberLabel.text = String(format: "%.0f", sender.value)
+        numberOfPeople = Int(sender.value)
     }
     
-    @IBAction func calculatePressed(_ sender: Any) {
-        print(tip)
+    @IBAction func calculatePressed(_ sender: UIButton) {
+        
     }
     
 }
